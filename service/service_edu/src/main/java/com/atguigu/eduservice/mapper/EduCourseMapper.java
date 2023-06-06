@@ -14,7 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2023-05-23
  */
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
-    public CoursePublishVo getPublishCourseInfo(String courseId);
+    CoursePublishVo getPublishCourseInfo(String courseId);
 
     CourseWebVo getBaseCourseInfo(String courseId);
 }

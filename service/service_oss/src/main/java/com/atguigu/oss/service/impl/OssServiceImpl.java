@@ -42,7 +42,7 @@ public class OssServiceImpl implements OssService {
             String url="https://"+bucketName+"."+endpoint+"/"+fileName;
             return url;
         }catch (Exception e){
-            e.printStackTrace();;
+            e.printStackTrace();
             return null;
         }
     }

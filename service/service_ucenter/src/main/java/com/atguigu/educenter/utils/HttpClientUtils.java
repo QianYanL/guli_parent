@@ -30,6 +30,7 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -58,21 +59,21 @@ public class HttpClientUtils {
 		client = HttpClients.custom().setConnectionManager(cm).build();
 	}
 
-	public static String postParameters(String url, String parameterStr) throws ConnectTimeoutException, SocketTimeoutException, Exception{
+	public static String postParameters(String url, String parameterStr) throws Exception{
 		return post(url,parameterStr,"application/x-www-form-urlencoded",charset,connTimeout,readTimeout);
 	}
 
-	public static String postParameters(String url, String parameterStr,String charset, Integer connTimeout, Integer readTimeout) throws ConnectTimeoutException, SocketTimeoutException, Exception{
+	public static String postParameters(String url, String parameterStr,String charset, Integer connTimeout, Integer readTimeout) throws Exception{
 		return post(url,parameterStr,"application/x-www-form-urlencoded",charset,connTimeout,readTimeout);
 	}
 
-	public static String postParameters(String url, Map<String, String> params) throws ConnectTimeoutException,
-			SocketTimeoutException, Exception {
+	public static String postParameters(String url, Map<String, String> params) throws
+			Exception {
 		return postForm(url, params, null, connTimeout, readTimeout);
 	}
 
-	public static String postParameters(String url, Map<String, String> params, Integer connTimeout,Integer readTimeout) throws ConnectTimeoutException,
-			SocketTimeoutException, Exception {
+	public static String postParameters(String url, Map<String, String> params, Integer connTimeout,Integer readTimeout) throws
+			Exception {
 		return postForm(url, params, null, connTimeout, readTimeout);
 	}
 
@@ -191,7 +192,7 @@ public class HttpClientUtils {
 				client = HttpClientUtils.client;
 				res = client.execute(post);
 			}
-			return IOUtils.toString(res.getEntity().getContent(), "UTF-8");
+			return IOUtils.toString(res.getEntity().getContent(), StandardCharsets.UTF_8);
 		} finally {
 			post.releaseConnection();
 			if (url.startsWith("https") && client != null
