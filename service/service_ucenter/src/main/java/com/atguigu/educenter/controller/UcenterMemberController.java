@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/educenter/member")
-@CrossOrigin
+
 public class UcenterMemberController {
     @Autowired
     private UcenterMemberService memberservice;
@@ -51,6 +51,12 @@ public class UcenterMemberController {
         UcenterMemberOrder ucenterMemberOrder = new UcenterMemberOrder();
         BeanUtils.copyProperties(ucenterMember,ucenterMemberOrder);
         return ucenterMemberOrder;
+    }
+
+    @GetMapping("countRegister/{day}")
+    public R countRegister(@PathVariable String day){
+        Integer count = memberservice.countRegisterDay(day);
+        return R.ok().data("countRegister",count);
     }
 }
 
